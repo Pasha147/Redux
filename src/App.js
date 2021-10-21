@@ -1,11 +1,14 @@
 import "./App.css";
 import Component from "./Component";
-import store from "./store";
+import InpComp from "./Inpcomp";
+import Coments from "./Coments";
 
 function App() {
   return (
     <div>
-      <Component store={store} />
+      <Component />
+      <InpComp />
+      <Coments />
     </div>
   );
 }

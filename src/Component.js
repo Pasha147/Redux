@@ -1,29 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
+import { incrCounter, multiplyCounter } from "./actions";
 
 function Component(props) {
-  console.log("props>", props);
+  // console.log("state>", state);
   return (
     <div>
       <h1>Counter {props.counterp}</h1>
       <button onClick={props.increment}>increment</button>
+      <button
+        onClick={() => {
+          return props.multiply(8);
+        }}
+      >
+        Multiply
+      </button>
     </div>
   );
 }
 
 function mapStateToProps(state) {
-  console.log("mapStateToProps>", state);
+  const { compReducer } = state;
   return {
-    counterp: state.counter,
+    counterp: compReducer.counter,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     increment: () => {
-      console.log("increment");
-      const action = { type: "INCREMENT" };
-      dispatch(action);
+      return dispatch(incrCounter());
+    },
+    multiply: (n) => {
+      return dispatch(multiplyCounter(n));
     },
   };
 }
