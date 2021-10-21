@@ -1,13 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import thunk from "redux-thunk";
+import { createStore, compose, applyMiddleware } from "redux";
 import { rootReducer } from "./rootReducer";
 import { Provider } from "react-redux";
+import { spamFilter } from "./middleware";
 
 import "./index.css";
 import App from "./App";
 
-const store = createStore(rootReducer);
+// const store = createStore(
+//   rootReducer,
+//   +window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+//   compose(applyMiddleware(thunk))
+// );
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  rootReducer /* preloadedState, */,
+  composeEnhancers(applyMiddleware(thunk, spamFilter))
+);
 
 ReactDOM.render(
   <Provider store={store}>

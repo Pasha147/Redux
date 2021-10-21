@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SingleComent from "./SingleComent";
-import { comentCreate } from "./actions";
+import { comentCreate, commentsLoad } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 
 function Coments(props) {
@@ -26,6 +26,10 @@ function Coments(props) {
   };
 
   //   console.log("Comments>>", comments);
+
+  useEffect(() => {
+    dispatch(commentsLoad());
+  }, []);
 
   return (
     <div>
